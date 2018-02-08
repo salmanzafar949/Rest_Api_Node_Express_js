@@ -24,6 +24,25 @@ router.post('/',function(req, res, next){
     }).catch(next);
 });
 
+
+router.put('/user/edit/:id',function (req,res,next) {
+
+    var id = req.params.id;
+    var Data = {
+
+        name: req.body.name,
+        email: req.body.email,
+        pass: req.body.pass
+    };
+    register.findByIdAndUpdate(id,Data).then(function(data){
+        res.send({
+            status: 200,
+            data: data
+        });
+    }).catch(next);
+
+});
+
 router.delete('/user/delete/:id',function (req,res,next) {
 
     var id = req.params.id;
