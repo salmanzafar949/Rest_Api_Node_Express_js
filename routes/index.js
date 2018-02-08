@@ -46,10 +46,12 @@ router.put('/user/edit/:id',function (req,res,next) {
 router.delete('/user/delete/:id',function (req,res,next) {
 
     var id = req.params.id;
-    register.findByIdAndRemove(id).exec().then(function(data){
-        res.send({
-            status: 200,
-            data: data
+    register.findByIdAndRemove(id).exec().then(function(){
+        register.findById(id).then(function (data) {
+            res.send({
+                status: 200,
+                data: data
+            });
         });
     }).catch(next);
 
